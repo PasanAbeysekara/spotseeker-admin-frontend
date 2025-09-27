@@ -18,7 +18,7 @@ const Avatar = forwardRef((props, ref) => {
     status,
     badgeUp,
     content,
-    tag: Tag,
+    tag: Tag = "div",
     initials,
     imgWidth,
     className,
@@ -156,9 +156,4 @@ Avatar.propTypes = {
       return new Error("initials must be a boolean!")
     }
   }
-}
-
-// ** Default Props
-Avatar.defaultProps = {
-  tag: "div"
 }

@@ -15,7 +15,7 @@ const InputPasswordToggle = forwardRef((props, ref) => {
     label,
     hideIcon,
     showIcon,
-    visible,
+    visible = false,
     className,
     htmlFor,
     placeholder,
@@ -106,7 +106,3 @@ InputPasswordToggle.propTypes = {
   }
 }
 
-// ** Default Props
-InputPasswordToggle.defaultProps = {
-  visible: false
-}

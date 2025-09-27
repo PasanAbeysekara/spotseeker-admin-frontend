@@ -13,13 +13,13 @@ import { lineChartOptions } from "./ChartOptions"
 
 const StatsWithLineChart = ({
   icon,
-  color,
+  color = "primary",
   stats,
   statTitle,
   series,
-  options,
+  options = lineChartOptions,
   type,
-  height,
+  height = 100,
   ...rest
 }) => {
   return (
@@ -35,12 +35,7 @@ const StatsWithLineChart = ({
           icon={icon}
         />
       </CardHeader>
-      <Chart
-        options={options}
-        series={series}
-        type={type}
-        height={height ? height : 100}
-      />
+      <Chart options={options} series={series} type={type} height={height} />
     </Card>
   )
 }
@@ -50,17 +45,11 @@ export default StatsWithLineChart
 // ** PropTypes
 StatsWithLineChart.propTypes = {
   type: PropTypes.string,
-  height: PropTypes.string,
+  height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   options: PropTypes.object,
   icon: PropTypes.element.isRequired,
-  color: PropTypes.string.isRequired,
+  color: PropTypes.string,
   stats: PropTypes.string.isRequired,
   series: PropTypes.array.isRequired,
   statTitle: PropTypes.string.isRequired
-}
-
-// ** Default Props
-StatsWithLineChart.defaultProps = {
-  options: lineChartOptions,
-  color: "primary"
 }

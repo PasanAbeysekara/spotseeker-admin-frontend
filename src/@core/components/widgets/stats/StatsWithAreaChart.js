@@ -12,20 +12,18 @@ import { Card, CardBody } from "reactstrap"
 // ** Default Options
 import { areaChartOptions } from "./ChartOptions"
 
-const StatsWithAreaChart = (props) => {
-  // ** Props
-  const {
-    icon,
-    color,
-    stats,
-    statTitle,
-    series,
-    options,
-    type,
-    height,
-    className,
-    ...rest
-  } = props
+const StatsWithAreaChart = ({
+  icon,
+  color = "primary",
+  stats,
+  statTitle,
+  series,
+  options = areaChartOptions,
+  type,
+  height = 100,
+  className,
+  ...rest
+}) => {
   return (
     <Card {...rest}>
       <CardBody
@@ -41,12 +39,7 @@ const StatsWithAreaChart = (props) => {
         <h2 className="fw-bolder mt-1">{stats}</h2>
         <p className="card-text">{statTitle}</p>
       </CardBody>
-      <Chart
-        options={options}
-        series={series}
-        type={type}
-        height={height ? height : 100}
-      />
+      <Chart options={options} series={series} type={type} height={height} />
     </Card>
   )
 }
@@ -56,18 +49,12 @@ export default StatsWithAreaChart
 // ** PropTypes
 StatsWithAreaChart.propTypes = {
   type: PropTypes.string,
-  height: PropTypes.string,
+  height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   options: PropTypes.object,
   className: PropTypes.string,
   icon: PropTypes.element.isRequired,
-  color: PropTypes.string.isRequired,
+  color: PropTypes.string,
   stats: PropTypes.string.isRequired,
   series: PropTypes.array.isRequired,
   statTitle: PropTypes.string.isRequired
-}
-
-// ** Default Props
-StatsWithAreaChart.defaultProps = {
-  color: "primary",
-  options: areaChartOptions
 }

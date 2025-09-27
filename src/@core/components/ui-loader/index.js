@@ -11,8 +11,14 @@ import { Spinner } from "reactstrap"
 // ** Styles
 import "./ui-loader.scss"
 
-const UILoader = (props) => {
-  const { children, blocking, loader, className, tag, overlayColor } = props
+const UILoader = ({
+  children,
+  blocking = false,
+  loader = <Spinner color="primary" />,
+  className,
+  tag = "div",
+  overlayColor
+}) => {
 
   const Tag = tag
 
@@ -42,16 +48,10 @@ const UILoader = (props) => {
 
 export default UILoader
 
-UILoader.defaultProps = {
-  tag: "div",
-  blocking: false,
-  loader: <Spinner color="primary" />
-}
-
 UILoader.propTypes = {
   tag: Proptypes.string,
   loader: Proptypes.any,
   className: Proptypes.string,
   overlayColor: Proptypes.string,
-  blocking: Proptypes.bool.isRequired
+  blocking: Proptypes.bool
 }
