@@ -26,7 +26,8 @@ module.exports = {
       '@utils': path.resolve(__dirname, 'src/utility/Utils'),
       '@alerts': path.resolve(__dirname, 'src/utility/alerts'),
       '@hooks': path.resolve(__dirname, 'src/utility/hooks'),
-      '@services': path.resolve(__dirname, 'src/services')
+      '@services': path.resolve(__dirname, 'src/services'),
+      reactstrap$: path.resolve(__dirname, 'src/patches/reactstrap.js')
     }
   }
 }
