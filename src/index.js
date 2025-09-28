@@ -49,8 +49,13 @@ const LazyApp = lazy(() => import('./App'))
 const container = document.getElementById('root')
 const root = createRoot(container)
 
+const routerFutureConfig = {
+  v7_startTransition: true,
+  v7_relativeSplatPath: true
+}
+
 root.render(
-  <BrowserRouter>
+  <BrowserRouter future={routerFutureConfig}>
     <Provider store={store}>
       <Suspense fallback={<Spinner />}>
         <AbilityContext.Provider value={ability}>

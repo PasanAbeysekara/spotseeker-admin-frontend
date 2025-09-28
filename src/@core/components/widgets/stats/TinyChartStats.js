@@ -5,9 +5,7 @@ import Chart from "react-apexcharts"
 // ** Reactstrap Imports
 import { Card, CardBody } from "reactstrap"
 
-const TinyChartStats = (props) => {
-  // ** Props
-  const { title, stats, options, series, type, height } = props
+const TinyChartStats = ({ title, stats, options, series, type, height = 100 }) => {
 
   return (
     <Card className="card-tiny-line-stats">
@@ -29,9 +27,4 @@ TinyChartStats.propTypes = {
   stats: PropTypes.string.isRequired,
   series: PropTypes.array.isRequired,
   options: PropTypes.object.isRequired
-}
-
-// ** Default Props
-TinyChartStats.defaultProps = {
-  height: 100
 }

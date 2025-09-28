@@ -5,7 +5,7 @@ import { Fragment, useEffect, memo } from "react"
 import classnames from "classnames"
 
 // ** Store & Actions
-import { useSelector, useDispatch } from "react-redux"
+import { useSelector, useDispatch, shallowEqual } from "react-redux"
 import {
   handleContentWidth,
   handleMenuCollapsed,
@@ -24,15 +24,20 @@ const LayoutWrapper = (props) => {
 
   // ** Store Vars
   const dispatch = useDispatch()
-  const store = useSelector((state) => state)
-
-  const navbarStore = store.navbar
-  const layoutStored = store.layout.layout
-  const contentWidth = store.layout.contentWidth
+  const navbarQuery = useSelector((state) => state.navbar.query)
+  const { layoutType, contentWidth, menuCollapsed, menuHidden } = useSelector(
+    (state) => ({
+      layoutType: state.layout.layout,
+      contentWidth: state.layout.contentWidth,
+      menuCollapsed: state.layout.menuCollapsed,
+      menuHidden: state.layout.menuHidden
+    }),
+    shallowEqual
+  )
   //** Vars
   const appLayoutCondition =
-    (layoutStored.layout === "horizontal" && !routeMeta) ||
-    (layoutStored.layout === "horizontal" && routeMeta && !routeMeta.appLayout)
+    (layoutType === "horizontal" && !routeMeta) ||
+    (layoutType === "horizontal" && routeMeta && !routeMeta.appLayout)
   const Tag = appLayoutCondition ? "div" : Fragment
 
   // ** Clean Up Function
@@ -40,21 +45,21 @@ const LayoutWrapper = (props) => {
     if (routeMeta) {
       if (
         routeMeta.contentWidth &&
-        routeMeta.contentWidth === store.layout.contentWidth
+        routeMeta.contentWidth === contentWidth
       ) {
         dispatch(handleContentWidth(themeConfig.layout.contentWidth))
       }
       if (
         routeMeta.menuCollapsed &&
-        routeMeta.menuCollapsed === store.layout.menuCollapsed
+        routeMeta.menuCollapsed === menuCollapsed
       ) {
-        dispatch(handleMenuCollapsed(!store.layout.menuCollapsed))
+        dispatch(handleMenuCollapsed(!menuCollapsed))
       }
       if (
         routeMeta.menuHidden &&
-        routeMeta.menuHidden === store.layout.menuHidden
+        routeMeta.menuHidden === menuHidden
       ) {
-        dispatch(handleMenuHidden(!store.layout.menuHidden))
+        dispatch(handleMenuHidden(!menuHidden))
       }
     }
   }
@@ -80,7 +85,7 @@ const LayoutWrapper = (props) => {
       className={classnames("app-content content overflow-hidden", {
         [routeMeta ? routeMeta.className : ""]:
           routeMeta && routeMeta.className,
-        "show-overlay": navbarStore.query.length
+        "show-overlay": navbarQuery && navbarQuery.length
       })}
     >
       <div className="content-overlay"></div>

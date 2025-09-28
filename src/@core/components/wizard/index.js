@@ -14,11 +14,11 @@ import "../../../@core/scss/base/plugins/forms/form-wizard.scss"
 const Wizard = forwardRef((props, ref) => {
   // ** Props
   const {
-    type,
+    type = "horizontal",
     steps,
-    options,
+    options = {},
     instance,
-    separator,
+    separator = <ChevronRight size={17} />,
     className,
     headerClassName,
     contentClassName,
@@ -123,13 +123,6 @@ const Wizard = forwardRef((props, ref) => {
 })
 
 export default Wizard
-
-// ** Default Props
-Wizard.defaultProps = {
-  options: {},
-  type: "horizontal",
-  separator: <ChevronRight size={17} />
-}
 
 // ** PropTypes
 Wizard.propTypes = {

@@ -4,9 +4,12 @@ import { useEffect, useState } from "react"
 // ** Third Party Components
 import Proptypes from "prop-types"
 
-const ScrollTop = (props) => {
-  // ** Props
-  const { showOffset, scrollBehaviour, children, ...rest } = props
+const ScrollTop = ({
+  showOffset,
+  scrollBehaviour = "smooth",
+  children,
+  ...rest
+}) => {
 
   // ** State
   const [visible, setVisible] = useState(false)
@@ -43,8 +46,4 @@ ScrollTop.propTypes = {
   showOffset: Proptypes.number,
   children: Proptypes.any.isRequired,
   scrollBehaviour: Proptypes.oneOf(["smooth", "instant", "auto"])
-}
-
-ScrollTop.defaultProps = {
-  scrollBehaviour: "smooth"
 }
